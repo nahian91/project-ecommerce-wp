@@ -3,7 +3,6 @@
 /*
 Template Name: Home
 */
-
 get_header();?>
 
     <!-- Hero Section Begin -->
@@ -17,17 +16,18 @@ get_header();?>
                             <span>All departments</span>
                         </div>
                         <ul>
-                            <li><a href="#">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit & Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter & Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya & Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
-                            <li><a href="#">Fresh Bananas</a></li>
+                            <?php
+                                $args = array(
+                                    'taxonomy' => 'product_cat',
+                                    'hide_empty' => true
+                                );
+                                $cats = get_categories($args);
+                                foreach($cats as $cat) {
+                            ?>
+                                <li><a href="<?php echo get_term_link($cat->slug, 'product_cat') ?>"><?php echo $cat->cat_name;?></a></li>
+                            <?php
+                                }
+                            ?>
                         </ul>
                     </div>
                 </div>
@@ -48,17 +48,21 @@ get_header();?>
                                 <i class="fa fa-phone"></i>
                             </div>
                             <div class="hero__search__phone__text">
-                                <h5>+65 11.188.888</h5>
+                                <h5><?php the_field('phone', 'option');?></h5>
                                 <span>support 24/7 time</span>
                             </div>
                         </div>
                     </div>
-                    <div class="hero__item set-bg" data-setbg="<?php echo get_template_directory_uri();?>/img/hero/banner.jpg">
+                    <?php
+                        $bannar = get_field('bannar', 'option');
+                    ?>
+                    <div class="hero__item set-bg" style="background-image:url('<?php echo $bannar['bannar_image']['url'];?>">
                         <div class="hero__text">
-                            <span>FRUIT FRESH</span>
-                            <h2>Vegetable <br />100% Organic</h2>
-                            <p>Free Pickup and Delivery Available</p>
-                            <a href="#" class="primary-btn">SHOP NOW</a>
+                            
+                            <span><?php echo $bannar['bannar_subtitle'];?></span>
+                            <h2><?php echo $bannar['bannar_title'];?></h2>
+                            <p><?php echo $bannar['bannar_description'];?></p>
+                            <a href="<?php echo $bannar['bannar_btn_url'];?>" class="primary-btn"><?php echo $bannar['bannar_btn_text'];?></a>
                         </div>
                     </div>
                 </div>
@@ -73,27 +77,27 @@ get_header();?>
             <div class="row">
                 <div class="categories__slider owl-carousel">
                     <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="<?php echo get_template_directory_uri();?>/img/categories/cat-1.jpg">
+                        <div class="categories__item set-bg" style="background-image:url(<?php echo get_template_directory_uri();?>/img/categories/cat-1.jpg);">
                             <h5><a href="#">Fresh Fruit</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="<?php echo get_template_directory_uri();?>/img/categories/cat-2.jpg">
+                        <div class="categories__item set-bg" style="background-image:url(<?php echo get_template_directory_uri();?>/img/categories/cat-2.jpg);">
                             <h5><a href="#">Dried Fruit</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="<?php echo get_template_directory_uri();?>/img/categories/cat-3.jpg">
+                        <div class="categories__item set-bg" style="background-image:url(<?php echo get_template_directory_uri();?>/img/categories/cat-3.jpg);">
                             <h5><a href="#">Vegetables</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="<?php echo get_template_directory_uri();?>/img/categories/cat-4.jpg">
+                        <div class="categories__item set-bg" style="background-image:url(<?php echo get_template_directory_uri();?>/img/categories/cat-4.jpg);">
                             <h5><a href="#">drink fruits</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="<?php echo get_template_directory_uri();?>/img/categories/cat-5.jpg">
+                        <div class="categories__item set-bg" style="background-image:url(<?php echo get_template_directory_uri();?>/img/categories/cat-5.jpg);">
                             <h5><a href="#">drink fruits</a></h5>
                         </div>
                     </div>
@@ -125,7 +129,7 @@ get_header();?>
             <div class="row featured__filter">
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="<?php echo get_template_directory_uri();?>/img/featured/feature-1.jpg">
+                        <div class="featured__item__pic set-bg" style="background-image:url('<?php echo get_template_directory_uri();?>/img/featured/feature-1.jpg')">
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -140,7 +144,7 @@ get_header();?>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="<?php echo get_template_directory_uri();?>/img/featured/feature-2.jpg">
+                        <div class="featured__item__pic set-bg" style="background-image:url('<?php echo get_template_directory_uri();?>/img/featured/feature-2.jpg')">  
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -155,7 +159,7 @@ get_header();?>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fresh-meat">
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="<?php echo get_template_directory_uri();?>/img/featured/feature-3.jpg">
+                        <div class="featured__item__pic set-bg" style="background-image:url('<?php echo get_template_directory_uri();?>/img/featured/feature-3.jpg')">
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -170,7 +174,7 @@ get_header();?>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood oranges">
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="<?php echo get_template_directory_uri();?>/img/featured/feature-4.jpg">
+                        <div class="featured__item__pic set-bg" style="background-image:url('<?php echo get_template_directory_uri();?>/img/featured/feature-4.jpg')">
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -185,7 +189,7 @@ get_header();?>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="<?php echo get_template_directory_uri();?>/img/featured/feature-5.jpg">
+                        <div class="featured__item__pic set-bg" style="background-image:url('<?php echo get_template_directory_uri();?>/img/featured/feature-5.jpg')">
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -200,7 +204,7 @@ get_header();?>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fastfood">
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="<?php echo get_template_directory_uri();?>/img/featured/feature-6.jpg">
+                        <div class="featured__item__pic set-bg" style="background-image:url('<?php echo get_template_directory_uri();?>/img/featured/feature-6.jpg')">
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -215,7 +219,7 @@ get_header();?>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="<?php echo get_template_directory_uri();?>/img/featured/feature-7.jpg">
+                        <div class="featured__item__pic set-bg" style="background-image:url('<?php echo get_template_directory_uri();?>/img/featured/feature-7.jpg')">
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -230,7 +234,7 @@ get_header();?>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="<?php echo get_template_directory_uri();?>/img/featured/feature-8.jpg">
+                        <div class="featured__item__pic set-bg" style="background-image:url('<?php echo get_template_directory_uri();?>/img/featured/feature-8.jpg')">
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -272,6 +276,7 @@ get_header();?>
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-6">
+                    
                     <div class="latest-product__text">
                         <h4>Latest Products</h4>
                         <div class="latest-product__slider owl-carousel">
