@@ -177,6 +177,12 @@ if( function_exists('acf_add_options_page') ) {
 		'menu_title'	=> 'Header',
 		'parent_slug'	=> 'theme-general-settings',
 	));
+
+    acf_add_options_sub_page(array(
+		'page_title' 	=> 'Theme Advertisement Settings',
+		'menu_title'	=> 'ADs',
+		'parent_slug'	=> 'theme-general-settings',
+	));
 	
 	acf_add_options_sub_page(array(
 		'page_title' 	=> 'Theme Footer Settings',

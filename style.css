@@ -458,3 +458,6 @@ input[type="number"] {
   width: 200px;
   border-radius: 0;
 }
+.woocommerce-Price-currencySymbol {
+  display: inline-block !important;
+}
