@@ -461,3 +461,24 @@ input[type="number"] {
 .woocommerce-Price-currencySymbol {
   display: inline-block !important;
 }
+.footer__widget ul {
+  width: 100%;
+  float: none;
+}
+.footer__widget form input[type="submit"] {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+  line-height: 15px;
+  color: #fff;
+  cursor: pointer;
+}
+.wpcf7-response-output {
+  margin-top: -80px !important;
+}
+.contact-form form input[type="submit"] {
+	width: auto;
+	color: #fff;
+	cursor: pointer;
+}

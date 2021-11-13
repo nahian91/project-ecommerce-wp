@@ -183,6 +183,12 @@ if( function_exists('acf_add_options_page') ) {
 		'menu_title'	=> 'ADs',
 		'parent_slug'	=> 'theme-general-settings',
 	));
+
+    acf_add_options_sub_page(array(
+		'page_title' 	=> 'Theme Contact Settings',
+		'menu_title'	=> 'Contact Page',
+		'parent_slug'	=> 'theme-general-settings',
+	));
 	
 	acf_add_options_sub_page(array(
 		'page_title' 	=> 'Theme Footer Settings',
@@ -191,3 +197,17 @@ if( function_exists('acf_add_options_page') ) {
 	));
 	
 }
+
+// Sidebar Register
+function organi_widgets_init() {
+    register_sidebar( array(
+        'name'          => __( 'Footer Widget', 'organi' ),
+        'id'            => 'footer',
+        'description'   => __( 'Widgets in this area will be shown on all posts and pages.', 'organi' ),
+        'before_widget' => '<ul id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</ul>',
+        'before_title'  => '<h6>',
+        'after_title'   => '</h6>',
+    ) );
+}
+add_action( 'widgets_init', 'organi_widgets_init' );
