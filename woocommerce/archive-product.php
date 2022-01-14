@@ -41,12 +41,7 @@ get_header( 'shop' );
 		<div class="row">
 			<div class="col-lg-3 col-md-5">
 				<?php
-					/**
-					 * Hook: woocommerce_sidebar.
-					 *
-					 * @hooked woocommerce_get_sidebar - 10
-					 */
-					do_action( 'woocommerce_sidebar' );
+					dynamic_sidebar('woocommerce');
 				?>
 			</div>
 			<div class="col-lg-9 col-md-7">
