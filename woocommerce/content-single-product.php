@@ -63,19 +63,21 @@ global $product;
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__pic">
                         <div class="product__details__pic__item">
-							<?php woocommerce_show_product_sale_flash(); ?>
-                            <?php woocommerce_show_product_images(); ?>
+							<img class="product__details__pic__item--large" src="<?php echo wp_get_attachment_url( $product->get_image_id() ); ?>" alt="">
                         </div>
-                        <!-- <div class="product__details__pic__slider owl-carousel">
-                            <img data-imgbigurl="img/product/details/product-details-2.jpg"
-                                src="img/product/details/thumb-1.jpg" alt="">
-                            <img data-imgbigurl="img/product/details/product-details-3.jpg"
-                                src="img/product/details/thumb-2.jpg" alt="">
-                            <img data-imgbigurl="img/product/details/product-details-5.jpg"
-                                src="img/product/details/thumb-3.jpg" alt="">
-                            <img data-imgbigurl="img/product/details/product-details-4.jpg"
-                                src="img/product/details/thumb-4.jpg" alt="">
-                        </div> -->
+
+                        <div class="product__details__pic__slider owl-carousel">
+                            <?php
+                                $attachment_ids = $product->get_gallery_image_ids();
+                                foreach( $attachment_ids as $attachment_id ) {
+                                $image_link = wp_get_attachment_url( $attachment_id );
+                            ?>
+                                <img data-imgbigurl="<?php echo $image_link;?>"
+                                src="<?php echo $image_link;?>" alt="">
+                            <?php
+                            }
+                        ?>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
@@ -88,15 +90,21 @@ global $product;
                         <?php woocommerce_template_single_excerpt();?>
                         <?php woocommerce_template_single_add_to_cart();?>
                         <ul>
-                            <li><b>Availability</b> <span><?php echo $product->is_in_stock(); ?></span></li>
+                            <li><b>Availability</b> <span><?php echo $product->get_stock_quantity(); ?></span></li>
                             <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
-                            <li><b>Weight</b> <span>0.5 kg</span></li>
+                            <li><b>Weight</b> <span>
+                                <?php echo $product->get_weight();?> <?php echo get_option('woocommerce_weight_unit');?></span></li>
                             <li><b>Share on</b>
                                 <div class="share">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-instagram"></i></a>
-                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+
+                                <a href="https://www.facebook.com/sharer/sharer.php?u=<?= get_permalink(); ?>" title="Share on Facebook" target="_blank"><i class="fa fa-facebook-f"></i></a>
+
+                                <a href="https://www.twitter.com/share?url=<?= get_permalink(); ?>&text=<?= get_the_title(); ?>" title="Share on Twitter" target="_blank"><i class="fa fa-twitter"></i></a>
+
+                                <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?= get_permalink(); ?>" title="Share on Linkedin" target="_blank"><i class="fa fa-linkedin"></i></a>
+
+                                <a href="mailto:?subject=<?= get_the_title(); ?> - <?= site_url(); ?>&body=I found this post on <?= site_url(); ?> and thought it would interest you.%0D%0A%0D%0A<?= get_the_title(); ?>%0D%0A<?= get_permalink(); ?>" title="Send to an E-mail" target="_blank"><i class="fa fa-envelope"></i></i>
+                                </a>
                                 </div>
                             </li>
                         </ul>
